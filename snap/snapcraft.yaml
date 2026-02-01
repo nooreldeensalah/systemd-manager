@@ -1,0 +1,52 @@
+name: systemd-manager
+title: Systemd Manager
+summary: A modern desktop application for managing systemd services on Ubuntu
+description: |
+  Systemd Manager is a graphical application for managing systemd services,
+  viewing logs, and analyzing boot times on Ubuntu Desktop.
+
+  Features:
+  - View and manage systemd units (services, timers, sockets, etc.)
+  - Start, stop, restart, enable, and disable services
+  - View real-time journal logs with filtering and search
+  - Analyze boot times with systemd-analyze
+  - Support for both system and user mode
+
+  Built with Flutter using Ubuntu's Yaru design language.
+
+  Note: This snap uses classic confinement to access systemd services,
+  which requires full system access to manage system units via D-Bus.
+
+confinement: classic
+base: core24
+grade: stable
+version: "1.0.0"
+license: GPL-3.0
+
+source-code: https://github.com/nooreldeensalah/systemd-manager
+issues: https://github.com/nooreldeensalah/systemd-manager/issues
+
+platforms:
+  amd64:
+
+parts:
+  systemd-manager:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart
+    build-packages:
+      - pkg-config
+      - libgtk-3-dev
+    stage-packages:
+      - libgtk-3-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-0
+      - libcairo2
+      - libpango-1.0-0
+      - libx11-6
+      - libgl1
+      - libegl1
+
+apps:
+  systemd-manager:
+    command: systemd_manager

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Systemd Manager
+GenericName=Service Manager
+Comment=Manage systemd services, view logs, and analyze boot times
+Exec=systemd-manager
+Icon=${SNAP}/meta/gui/systemd-manager.svg
+Terminal=false
+Categories=System;Settings;Monitor;
+Keywords=systemd;services;system;manager;logs;journal;boot;
+StartupWMClass=systemd_manager
+StartupNotify=true
