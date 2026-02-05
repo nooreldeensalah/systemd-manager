@@ -14,9 +14,7 @@ class AnalyzeHeader extends ConsumerWidget {
         const Spacer(),
         YaruIconButton(
           icon: const Icon(YaruIcons.refresh),
-          onPressed: () {
-            ref.invalidate(bootTimingsProvider);
-          },
+          onPressed: () => ref.refreshAll(),
           tooltip: 'Refresh',
         ),
       ],

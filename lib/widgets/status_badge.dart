@@ -41,37 +41,31 @@ class StatusBadge extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    switch (activeState) {
-      case UnitActiveState.active:
-      case UnitActiveState.reloading:
-        return _StatusStyle(
+    return switch (activeState) {
+      UnitActiveState.active || UnitActiveState.reloading => _StatusStyle(
           label: activeState == UnitActiveState.reloading
               ? 'Reloading'
               : 'Active',
           color: Colors.green,
           isDark: isDark,
-        );
-      case UnitActiveState.failed:
-        return _StatusStyle(label: 'Failed', color: Colors.red, isDark: isDark);
-      case UnitActiveState.activating:
-      case UnitActiveState.deactivating:
-        return _StatusStyle(
+        ),
+      UnitActiveState.failed =>
+        _StatusStyle(label: 'Failed', color: Colors.red, isDark: isDark),
+      UnitActiveState.activating || UnitActiveState.deactivating => _StatusStyle(
           label: activeState == UnitActiveState.activating
               ? 'Activating'
               : 'Stopping',
           color: Colors.orange,
           isDark: isDark,
-        );
-      case UnitActiveState.inactive:
-      case UnitActiveState.maintenance:
-        return _StatusStyle(
+        ),
+      UnitActiveState.inactive || UnitActiveState.maintenance => _StatusStyle(
           label: activeState == UnitActiveState.maintenance
               ? 'Maintenance'
               : 'Inactive',
           color: Colors.grey,
           isDark: isDark,
-        );
-    }
+        ),
+    };
   }
 
   @override
@@ -190,33 +184,18 @@ class EnableBadge extends StatelessWidget {
     );
   }
 
-  String _getLabelForState(UnitFileState state) {
-    switch (state) {
-      case UnitFileState.enabled:
-      case UnitFileState.enabledRuntime:
-        return 'Enabled';
-      case UnitFileState.disabled:
-        return 'Disabled';
-      case UnitFileState.static_:
-        return 'Static';
-      case UnitFileState.masked:
-      case UnitFileState.maskedRuntime:
-        return 'Masked';
-      case UnitFileState.linked:
-      case UnitFileState.linkedRuntime:
-        return 'Linked';
-      case UnitFileState.alias:
-        return 'Alias';
-      case UnitFileState.indirect:
-        return 'Indirect';
-      case UnitFileState.generated:
-        return 'Generated';
-      case UnitFileState.transient:
-        return 'Transient';
-      case UnitFileState.bad:
-        return 'Bad';
-    }
-  }
+  String _getLabelForState(UnitFileState state) => switch (state) {
+        UnitFileState.enabled || UnitFileState.enabledRuntime => 'Enabled',
+        UnitFileState.disabled => 'Disabled',
+        UnitFileState.static_ => 'Static',
+        UnitFileState.masked || UnitFileState.maskedRuntime => 'Masked',
+        UnitFileState.linked || UnitFileState.linkedRuntime => 'Linked',
+        UnitFileState.alias => 'Alias',
+        UnitFileState.indirect => 'Indirect',
+        UnitFileState.generated => 'Generated',
+        UnitFileState.transient => 'Transient',
+        UnitFileState.bad => 'Bad',
+      };
 }
 
 class _StatusStyle {

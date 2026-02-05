@@ -23,14 +23,6 @@ class AnalyzeService {
     );
   }
 
-  Future<String> getCriticalChain([String? unit]) async {
-    final args = ['critical-chain'];
-    if (unit != null) {
-      args.add(unit);
-    }
-    return _runAnalyze(args);
-  }
-
   Future<String> _runAnalyze(List<String> args) async {
     _log.debug('Running systemd-analyze with args: $args');
 

@@ -17,14 +17,8 @@ enum UnitType {
 
   final String displayName;
 
-  static UnitType? fromUnitName(String unitName) {
-    for (final type in UnitType.values) {
-      if (unitName.endsWith('.${type.suffix}')) {
-        return type;
-      }
-    }
-    return null;
-  }
+  static UnitType? fromUnitName(String unitName) =>
+      UnitType.values.where((t) => unitName.endsWith('.${t.suffix}')).firstOrNull;
 }
 
 enum UnitLoadState {
@@ -37,12 +31,10 @@ enum UnitLoadState {
   const UnitLoadState(this.value);
   final String value;
 
-  static UnitLoadState fromString(String value) {
-    return UnitLoadState.values.firstWhere(
-      (e) => e.value == value.toLowerCase(),
-      orElse: () => UnitLoadState.error,
-    );
-  }
+  static UnitLoadState fromString(String value) => UnitLoadState.values.firstWhere(
+        (e) => e.value == value.toLowerCase(),
+        orElse: () => UnitLoadState.error,
+      );
 }
 
 enum UnitActiveState {
@@ -57,12 +49,11 @@ enum UnitActiveState {
   const UnitActiveState(this.value);
   final String value;
 
-  static UnitActiveState fromString(String value) {
-    return UnitActiveState.values.firstWhere(
-      (e) => e.value == value.toLowerCase(),
-      orElse: () => UnitActiveState.inactive,
-    );
-  }
+  static UnitActiveState fromString(String value) =>
+      UnitActiveState.values.firstWhere(
+        (e) => e.value == value.toLowerCase(),
+        orElse: () => UnitActiveState.inactive,
+      );
 
   bool get isRunning =>
       this == UnitActiveState.active || this == UnitActiveState.reloading;
@@ -88,12 +79,10 @@ enum UnitFileState {
   const UnitFileState(this.value);
   final String value;
 
-  static UnitFileState fromString(String value) {
-    return UnitFileState.values.firstWhere(
-      (e) => e.value == value.toLowerCase(),
-      orElse: () => UnitFileState.disabled,
-    );
-  }
+  static UnitFileState fromString(String value) => UnitFileState.values.firstWhere(
+        (e) => e.value == value.toLowerCase(),
+        orElse: () => UnitFileState.disabled,
+      );
 
   bool get isEnabled =>
       this == UnitFileState.enabled ||

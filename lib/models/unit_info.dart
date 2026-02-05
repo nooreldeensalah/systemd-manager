@@ -20,8 +20,6 @@ class UnitInfo with _$UnitInfo {
 
     required String objectPath,
 
-    @Default('') String following,
-
     @Default(0) int jobId,
 
     @Default('') String jobType,
@@ -36,13 +34,10 @@ class UnitInfo with _$UnitInfo {
 
   UnitType? get type => UnitType.fromUnitName(name);
 
-  String get baseName {
-    final type = this.type;
-    if (type != null) {
-      return name.substring(0, name.length - type.suffix.length - 1);
-    }
-    return name;
-  }
+  String get baseName => switch (type) {
+    final type? => name.substring(0, name.length - type.suffix.length - 1),
+    _ => name,
+  };
 
   bool get isRunning => activeState.isRunning;
 

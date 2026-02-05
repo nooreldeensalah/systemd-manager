@@ -45,12 +45,7 @@ class OverviewHeader extends ConsumerWidget {
         const Spacer(),
         IconButton(
           icon: const Icon(YaruIcons.refresh),
-          onPressed: () {
-            ref.invalidate(systemStateProvider);
-            ref.invalidate(systemdVersionProvider);
-            ref.invalidate(unitCountsProvider);
-            ref.invalidate(unitsProvider);
-          },
+          onPressed: () => ref.refreshAll(),
           tooltip: 'Refresh',
         ),
       ],

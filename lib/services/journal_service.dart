@@ -69,6 +69,4 @@ class JournalService {
 
     return parser.parseDiskUsage(result.stdout as String);
   }
-
-  void dispose() {}
 }

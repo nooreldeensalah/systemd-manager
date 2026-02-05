@@ -11,7 +11,6 @@ class DBusMappers {
       loadState: UnitLoadState.fromString(struct[2].asString()),
       activeState: UnitActiveState.fromString(struct[3].asString()),
       subState: struct[4].asString(),
-      following: struct[5].asString(),
       objectPath: struct[6].asObjectPath().value,
       jobId: struct[7].asUint32(),
       jobType: struct[8].asString(),
